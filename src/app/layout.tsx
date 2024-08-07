@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Wordle Clone",
   description: "Built by Barillamw. No relation to NY Times.",
-};/Users/Michael/Documents/src/WebApp-Portfolio/portfolio/public/favicon-32x32.png
+};
 
 export default function RootLayout({
   children,
