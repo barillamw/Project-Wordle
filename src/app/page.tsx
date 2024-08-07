@@ -1,7 +1,7 @@
 "use client";
 
 import { observer, useLocalObservable } from "mobx-react-lite";
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import Guess from "../components/Guess";
 import Qwerty from "../components/Qwerty";
 import PuzzleStore from "../stores/PuzzleStore";
@@ -10,6 +10,7 @@ import Dialogue from "../components/Dialogue"
 export default observer(function Home() {
   const store = useLocalObservable(() => PuzzleStore)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     store.init()
@@ -30,8 +31,15 @@ export default observer(function Home() {
     setIsModalOpen(false);
   };
 
+  const handleContainerClick = () => {
+    // Focus the hidden input on mobile devices
+    if (hiddenInputRef.current) {
+      hiddenInputRef.current.focus();
+    }
+  };
+
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-600">
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-600" onClick={handleContainerClick}>
       <h1 className="text-6xl font-bold uppercase text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-400">Wordle</h1>
       { store.guesses.map((_,i) => (
         <Guess 
