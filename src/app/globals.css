@@ -6,6 +6,18 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --emptyLetterBg: #fff;
+  --filledLetterBg: #999;
+  --light: #fff;
+  --dark: #000;
+  --med1: #eee;
+  --med2: #999;
+
+  --neutral: var(--med1);
+  --correct: #1d9300;;
+  --partial: #e9d100;;
+  --incorrect: var(--dark);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,5 +41,117 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.guess > div{
+  border-width: 3px;
+  font-size: 30px;
+  background: var(--light);
+}
+
+.guess > div.empty {
+  color: var(--neutral);
+  border-color: var(--med1);
+}
+
+.guess > div.notGuessed {
+  color: var(--dark);
+  border-color: var(--med2);
+  animation: bounce 0.2s ease-in-out forwards;
+  animation-delay: 0s;
+}
+
+.guess > div.correctPlacement {
+  --background: var(--correct);
+  animation: flip 0.4s ease forwards;
+  color: var(--dark);
+  
+}
+
+.guess > div.wrongPlacement {
+  --background: var(--partial);
+  animation: flip 0.4s ease forwards;
+  color: var(--dark);
+  border-color: var(--med2);
+}
+
+.guess > div.wrongLetter {
+  --background: var(--incorrect);
+  animation: flip 0.4s ease forwards;
+  color: var(--dark);
+  border-color: var(--med2);
+}
+
+.qwerty > div.letter {
+  color: #000;
+
+}
+
+.qwerty > div.notGuessed {
+  background-color: var(--neutral);
+}
+
+.qwerty > div.correctPlacement {
+  --letterColor: var(--correct);
+  background-color: var(--neutral);
+  animation: fade 1s ease-in-out forwards;
+  animation-delay: 2s;
+}
+
+.qwerty > div.wrongPlacement {
+  --letterColor: var(--partial);
+  background-color: var(--neutral);
+  animation: fade 1s ease-in-out forwards;
+  animation-delay: 2s;
+}
+
+.qwerty > div.wrongLetter {
+  --letterColor: var(--incorrect);
+  background-color: var(--neutral);
+  animation: fade 1s ease-in-out forwards;
+  animation-delay: 2s;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+  }
+  45% {
+    transform: rotateX(90deg);
+  }
+  55% {
+    transform: rotateX(90deg);
+    background: var(--background);
+    color: var(--light);
+    border-width: 0px;
+  }
+  100% {
+    transform: rotateX(0);
+    background: var(--background);
+    color: var(--light);
+    border-width: 0px;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade {
+  0% {
+    background-color: var(--neutral);
+  }
+  100% {
+    background-color: var(--letterColor);
+    color: var(--light)
   }
 }
