@@ -3,9 +3,9 @@ import PuzzleStore from '../stores/PuzzleStore'
 
 interface QwertyProps {
     store: typeof PuzzleStore
-  }
+}
 
-export default observer(function Qwerty({store}) {
+const Qwerty: React.FC<QwertyProps> = ({ store }) => {
     const qwerty = ["qwertyuiop", "asdfghjkl", "zxcvbnm"]
     return (<div>
         {qwerty.map((row) => (
@@ -29,4 +29,6 @@ export default observer(function Qwerty({store}) {
         ))}
     </div>
     )
-})
+}
+
+export default Qwerty;
